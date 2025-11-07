@@ -1,0 +1,21 @@
+spring:
+  config:
+    activate:
+      on-profile: local
+  cloud:
+    config:
+      enabled: false
+server:
+  port: 8082
+
+watcher:
+  scan-interval: PT5S
+  folders:
+    - path: /tmp/dms/watch/inbox
+      category: AUTOMATIC_INBOX
+      move-after-upload: true
+      archive-directory: /tmp/dms/watch/archive
+      active: true
+  document-service:
+    base-url: http://localhost:8080
+    token: ''

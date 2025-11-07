@@ -1,0 +1,22 @@
+{
+  "groups": [
+    {
+      "name": "watcher",
+      "type": "br.com.dms.config.WatchFolderProperties",
+      "sourceType": "br.com.dms.config.WatchFolderProperties"
+    }
+  ],
+  "properties": [
+    {
+      "name": "watcher.folders",
+      "type": "java.util.List<br.com.dms.config.WatchFolderProperties$WatchFolder>",
+      "sourceType": "br.com.dms.config.WatchFolderProperties"
+    },
+    {
+      "name": "watcher.scan-interval",
+      "type": "java.time.Duration",
+      "sourceType": "br.com.dms.config.WatchFolderProperties"
+    }
+  ],
+  "hints": []
+}

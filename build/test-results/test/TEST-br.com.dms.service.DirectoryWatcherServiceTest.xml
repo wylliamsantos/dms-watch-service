@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<testsuite name="br.com.dms.service.DirectoryWatcherServiceTest" tests="2" skipped="0" failures="0" errors="0" timestamp="2025-11-04T00:14:18" hostname="MacBook-Pro-de-Wylliam.local" time="0.467">
+  <properties/>
+  <testcase name="shouldPublishNewFiles()" classname="br.com.dms.service.DirectoryWatcherServiceTest" time="0.461"/>
+  <testcase name="shouldMoveFileToArchiveDirectoryWhenConfigured()" classname="br.com.dms.service.DirectoryWatcherServiceTest" time="0.004"/>
+  <system-out><![CDATA[21:14:18.713 [Test worker] INFO br.com.dms.service.DirectoryWatcherService -- Discovered file /var/folders/hp/94trb4rx49vfhvf365glqrc80000gn/T/watcher-test11499981631051956892/document13364440890365502367.pdf in folder /var/folders/hp/94trb4rx49vfhvf365glqrc80000gn/T/watcher-test11499981631051956892
+21:14:18.740 [Test worker] INFO br.com.dms.service.DirectoryWatcherService -- Discovered file /var/folders/hp/94trb4rx49vfhvf365glqrc80000gn/T/watcher-test1705085219178096199/document13247701602530266378.pdf in folder /var/folders/hp/94trb4rx49vfhvf365glqrc80000gn/T/watcher-test1705085219178096199
+21:14:18.741 [Test worker] INFO br.com.dms.service.DirectoryWatcherService -- Moved file /var/folders/hp/94trb4rx49vfhvf365glqrc80000gn/T/watcher-test1705085219178096199/document13247701602530266378.pdf to archive /var/folders/hp/94trb4rx49vfhvf365glqrc80000gn/T/watcher-archive15219787680815731556/document13247701602530266378.pdf
+]]></system-out>
+  <system-err><![CDATA[WARNING: A Java agent has been loaded dynamically (/Users/wylliamsantos/.gradle/caches/modules-2/files-2.1/net.bytebuddy/byte-buddy-agent/1.14.16/4a451ee6484abac3a498df0f3b33ed00a6fced4d/byte-buddy-agent-1.14.16.jar)
+WARNING: If a serviceability tool is in use, please run with -XX:+EnableDynamicAgentLoading to hide this warning
+WARNING: If a serviceability tool is not in use, please run with -Djdk.instrument.traceUsage for more information
+WARNING: Dynamic loading of agents will be disallowed by default in a future release
+]]></system-err>
+</testsuite>

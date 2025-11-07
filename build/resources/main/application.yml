@@ -1,0 +1,19 @@
+spring:
+  application:
+    name: dms-watch-service
+  cloud:
+    config:
+      enabled: false
+  rabbitmq:
+    host: ${WATCHER_RABBIT_HOST:localhost}
+    port: ${WATCHER_RABBIT_PORT:5672}
+    username: ${WATCHER_RABBIT_USER:guest}
+    password: ${WATCHER_RABBIT_PASSWORD:guest}
+
+watcher:
+  scan-interval: PT10S
+  folders: []
+  document-service:
+    base-url: ''
+    token: ''
+    timeout: PT5S
