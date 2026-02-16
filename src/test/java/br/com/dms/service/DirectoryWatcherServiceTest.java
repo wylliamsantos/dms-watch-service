@@ -14,6 +14,7 @@ import java.nio.file.Path;
 import java.util.List;
 
 import static org.assertj.core.api.Assertions.assertThat;
+import static org.mockito.Mockito.never;
 
 class DirectoryWatcherServiceTest {
 
@@ -73,5 +74,15 @@ class DirectoryWatcherServiceTest {
         AutomaticIngestionMessage message = captor.getValue();
         assertThat(message.getStoredPath()).isEqualTo(expectedLocation.toAbsolutePath().toString());
         assertThat(message.getSourcePath()).isEqualTo(file.toAbsolutePath().toString());
+    }
+
+    @Test
+    void shouldSkipFileWhenTenantIdIsMissing() throws IOException {
+        Files.createTempFile(tempDirectory, "document", ".pdf");
+        folder.setTenantId(" ");
+
+        watcherService.scanFolders();
+
+        Mockito.verify(publisher, never()).publish(Mockito.any(AutomaticIngestionMessage.class));
     }
 }
