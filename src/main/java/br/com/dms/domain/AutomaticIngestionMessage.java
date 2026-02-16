@@ -8,6 +8,7 @@ public class AutomaticIngestionMessage {
     private String storedPath;
     private String filename;
     private String category;
+    private String tenantId;
     private Instant discoveredAt;
 
     public AutomaticIngestionMessage() {
@@ -43,6 +44,14 @@ public class AutomaticIngestionMessage {
 
     public void setCategory(String category) {
         this.category = category;
+    }
+
+    public String getTenantId() {
+        return tenantId;
+    }
+
+    public void setTenantId(String tenantId) {
+        this.tenantId = tenantId;
     }
 
     public Instant getDiscoveredAt() {
