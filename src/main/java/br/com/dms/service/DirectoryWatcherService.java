@@ -77,6 +77,11 @@ public class DirectoryWatcherService {
             }
         }
 
+        if (!StringUtils.hasText(folder.getTenantId())) {
+            logger.warn("Skipping file {} because watch folder {} has no tenantId configured", path, folder.getPath());
+            return;
+        }
+
         AutomaticIngestionMessage message = new AutomaticIngestionMessage();
         message.setSourcePath(path.toAbsolutePath().toString());
         message.setStoredPath(storedPath.toAbsolutePath().toString());
