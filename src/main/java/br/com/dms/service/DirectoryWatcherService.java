@@ -82,6 +82,7 @@ public class DirectoryWatcherService {
         message.setStoredPath(storedPath.toAbsolutePath().toString());
         message.setFilename(path.getFileName().toString());
         message.setCategory(folder.getCategory());
+        message.setTenantId(folder.getTenantId());
         message.setDiscoveredAt(Instant.now());
 
         publisher.publish(message);

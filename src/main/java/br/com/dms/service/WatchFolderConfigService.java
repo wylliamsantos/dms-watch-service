@@ -87,6 +87,7 @@ public class WatchFolderConfigService {
         folder.setCategory(remote.getCategory());
         folder.setMoveAfterUpload(remote.isMoveAfterUpload());
         folder.setArchiveDirectory(remote.getArchiveDirectory());
+        folder.setTenantId(remote.getTenantId());
         folder.setActive(remote.isActive());
         return folder;
     }
@@ -96,6 +97,7 @@ public class WatchFolderConfigService {
         private String category;
         private boolean moveAfterUpload;
         private String archiveDirectory;
+        private String tenantId;
         private boolean active;
 
         public String getPath() {
@@ -128,6 +130,14 @@ public class WatchFolderConfigService {
 
         public void setArchiveDirectory(String archiveDirectory) {
             this.archiveDirectory = archiveDirectory;
+        }
+
+        public String getTenantId() {
+            return tenantId;
+        }
+
+        public void setTenantId(String tenantId) {
+            this.tenantId = tenantId;
         }
 
         public boolean isActive() {

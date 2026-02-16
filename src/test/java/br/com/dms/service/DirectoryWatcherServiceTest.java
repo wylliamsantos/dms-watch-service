@@ -29,6 +29,7 @@ class DirectoryWatcherServiceTest {
         folder = new WatchFolder();
         folder.setPath(tempDirectory.toString());
         folder.setCategory("AUTOMATIC");
+        folder.setTenantId("tenant-a");
 
         configService = Mockito.mock(WatchFolderConfigService.class);
         Mockito.when(configService.loadActiveFolders()).thenReturn(List.of(folder));
@@ -52,6 +53,7 @@ class DirectoryWatcherServiceTest {
         assertThat(message.getCategory()).isEqualTo("AUTOMATIC");
         assertThat(message.getSourcePath()).isEqualTo(file.toAbsolutePath().toString());
         assertThat(message.getStoredPath()).isEqualTo(file.toAbsolutePath().toString());
+        assertThat(message.getTenantId()).isEqualTo("tenant-a");
     }
 
     @Test

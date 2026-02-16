@@ -38,6 +38,7 @@ public class WatchFolderProperties {
         private String category;
         private boolean moveAfterUpload;
         private String archiveDirectory;
+        private String tenantId;
         private boolean active = true;
 
         public String getPath() {
@@ -70,6 +71,14 @@ public class WatchFolderProperties {
 
         public void setArchiveDirectory(String archiveDirectory) {
             this.archiveDirectory = archiveDirectory;
+        }
+
+        public String getTenantId() {
+            return tenantId;
+        }
+
+        public void setTenantId(String tenantId) {
+            this.tenantId = tenantId;
         }
 
         public boolean isActive() {
