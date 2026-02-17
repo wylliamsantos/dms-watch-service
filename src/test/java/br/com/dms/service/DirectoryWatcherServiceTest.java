@@ -55,6 +55,11 @@ class DirectoryWatcherServiceTest {
         assertThat(message.getSourcePath()).isEqualTo(file.toAbsolutePath().toString());
         assertThat(message.getStoredPath()).isEqualTo(file.toAbsolutePath().toString());
         assertThat(message.getTenantId()).isEqualTo("tenant-a");
+        assertThat(message.getEventType()).isEqualTo("DOCUMENT_WATCHED");
+        assertThat(message.getOccurredAt()).isNotNull();
+        assertThat(message.getEntityType()).isEqualTo("DOCUMENT");
+        assertThat(message.getEntityId()).isEqualTo(file.getFileName().toString());
+        assertThat(message.getMetadata()).containsEntry("category", "AUTOMATIC");
     }
 
     @Test
