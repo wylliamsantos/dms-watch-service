@@ -90,6 +90,21 @@ public class DirectoryWatcherService {
         message.setTenantId(folder.getTenantId());
         message.setDiscoveredAt(Instant.now());
 
+        message.setEventType("DOCUMENT_WATCHED");
+        message.setOccurredAt(message.getDiscoveredAt());
+        message.setUserId("watch-service");
+        message.setEntityType("DOCUMENT");
+        message.setEntityId(storedPath.getFileName().toString());
+        message.setMetadata(Map.of(
+            "category", folder.getCategory(),
+            "sourcePath", path.toAbsolutePath().toString(),
+            "storedPath", storedPath.toAbsolutePath().toString()
+        ));
+        message.setAttributes(Map.of(
+            "origin", "watch-service",
+            "moveAfterUpload", folder.isMoveAfterUpload()
+        ));
+
         publisher.publish(message);
         processedFiles.add(storedPath);
     }
