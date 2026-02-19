@@ -13,6 +13,17 @@ spring:
 watcher:
   scan-interval: PT10S
   folders: []
+  messaging:
+    exchange: watcher.documents
+    queue: watcher.ingestion.queue
+    routing-key: watcher.ingestion
+    retry:
+      max-attempts: 3
+      backoff-ms: 500
+    dlq:
+      exchange: watcher.documents.dlx
+      queue: watcher.ingestion.queue.dlq
+      routing-key: watcher.ingestion.dlq
   document-service:
     base-url: ''
     token: ''
