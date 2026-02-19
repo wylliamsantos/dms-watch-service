@@ -10,10 +10,13 @@ import org.springframework.stereotype.Service;
 import org.springframework.util.StringUtils;
 
 import java.io.IOException;
+import java.nio.charset.StandardCharsets;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
 import java.nio.file.StandardCopyOption;
+import java.security.MessageDigest;
+import java.security.NoSuchAlgorithmException;
 import java.time.Instant;
 import java.util.HashMap;
 import java.util.HashSet;
@@ -95,17 +98,37 @@ public class DirectoryWatcherService {
         message.setUserId("watch-service");
         message.setEntityType("DOCUMENT");
         message.setEntityId(storedPath.getFileName().toString());
+
+        String idempotencyKey = generateIdempotencyKey(folder.getTenantId(), storedPath);
         message.setMetadata(Map.of(
             "category", folder.getCategory(),
             "sourcePath", path.toAbsolutePath().toString(),
-            "storedPath", storedPath.toAbsolutePath().toString()
+            "storedPath", storedPath.toAbsolutePath().toString(),
+            "idempotencyKey", idempotencyKey
         ));
         message.setAttributes(Map.of(
             "origin", "watch-service",
-            "moveAfterUpload", folder.isMoveAfterUpload()
+            "moveAfterUpload", folder.isMoveAfterUpload(),
+            "idempotencyKey", idempotencyKey
         ));
 
         publisher.publish(message);
         processedFiles.add(storedPath);
+    }
+
+    private String generateIdempotencyKey(String tenantId, Path storedPath) {
+        String raw = tenantId + "::" + storedPath.toAbsolutePath();
+        try {
+            MessageDigest digest = MessageDigest.getInstance("SHA-256");
+            byte[] hash = digest.digest(raw.getBytes(StandardCharsets.UTF_8));
+            StringBuilder sb = new StringBuilder(hash.length * 2);
+            for (byte b : hash) {
+                sb.append(String.format("%02x", b));
+            }
+            return sb.toString();
+        } catch (NoSuchAlgorithmException e) {
+            logger.warn("SHA-256 unavailable, using raw idempotency key fallback", e);
+            return raw;
+        }
     }
 }

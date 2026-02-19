@@ -60,6 +60,8 @@ class DirectoryWatcherServiceTest {
         assertThat(message.getEntityType()).isEqualTo("DOCUMENT");
         assertThat(message.getEntityId()).isEqualTo(file.getFileName().toString());
         assertThat(message.getMetadata()).containsEntry("category", "AUTOMATIC");
+        assertThat(message.getMetadata()).containsKey("idempotencyKey");
+        assertThat(message.getAttributes()).containsKey("idempotencyKey");
     }
 
     @Test
