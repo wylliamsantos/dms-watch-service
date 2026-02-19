@@ -6,6 +6,7 @@ import org.slf4j.LoggerFactory;
 import org.springframework.amqp.AmqpException;
 import org.springframework.amqp.core.AmqpTemplate;
 import org.springframework.amqp.core.TopicExchange;
+import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Component;
 
@@ -23,7 +24,7 @@ public class RabbitDocumentIngestionPublisher implements DocumentIngestionPublis
     private final long retryBackoffMs;
 
     public RabbitDocumentIngestionPublisher(AmqpTemplate amqpTemplate,
-                                            TopicExchange exchange,
+                                            @Qualifier("watcherExchange") TopicExchange exchange,
                                             @Value("${watcher.messaging.routing-key:watcher.ingestion}") String routingKey,
                                             @Value("${watcher.messaging.dlq.exchange:watcher.documents.dlx}") String dlqExchangeName,
                                             @Value("${watcher.messaging.dlq.routing-key:watcher.ingestion.dlq}") String dlqRoutingKey,
